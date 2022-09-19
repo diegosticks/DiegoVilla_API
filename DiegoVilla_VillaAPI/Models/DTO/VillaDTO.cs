@@ -9,12 +9,11 @@ namespace DiegoVilla_VillaAPI.Models.DTO
         [MaxLength(30)]
         public string Name { get; set; }
         public string Details { get; set; }
+        [Required]
         public double Rate { get; set; }
         public int Occupancy { get; set; }
         public int Sqft { get; set; }
         public string ImageURL { get; set; }
         public string Amenity { get; set; }
-        public DateTime Created { get; set; }
-        public DateTime Updated { get; set; }
     }
 }

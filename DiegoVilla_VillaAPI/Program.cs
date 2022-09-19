@@ -1,15 +1,14 @@
-using DiegoVilla_VillaAPI.Logging;
-using Serilog;
+using DiegoVilla_VillaAPI.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-//// This is to log files
-//Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
-//    .WriteTo.File("log/villalogs.txt", rollingInterval: RollingInterval.Day).CreateLogger();
-
-//builder.Host.UseSerilog();
+//This is to connect out db
+builder.Services.AddDbContext<ApplicationDbContext>(option => {
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
+});
 
 builder.Services.AddControllers(option =>
 {
@@ -19,8 +18,6 @@ builder.Services.AddControllers(option =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-////For the ILogging service for dependency injection
-//builder.Services.AddSingleton<ILogging, LoggingV2>();
 
 var app = builder.Build();
 
